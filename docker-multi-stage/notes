@@ -1,0 +1,8 @@
+docker build --target builder -t greet-builder .
+
+docker run -it --rm greet-builder bash
+
+
+docker build -t greet-final .
+
+docker run -it --rm greet-final bash

@@ -1,0 +1,37 @@
+Using Default Bridge Network:
+
+docker run -d --name greet --network bridge -p 8080:8080 app:1.0
+
+
+docker run --rm --network bridge curlimages/curl http://greet:8080
+
+docker inspect greet -> get the IP address
+
+docker run --rm --network greet-net curlimages/curl http://172.17.0.2:8080
+
+
+
+# Create a custom bridge network
+docker network create greet-net
+
+# Run your Flask app on the bridge
+docker run -d --name greet --network greet-net -p 8080:8080 app:1.0
+
+# Run a curl container to access it by name
+docker run --rm --network greet-net curlimages/curl http://greet:8080
+
+
+Host network: 
+# Run your app using host network
+docker run --rm --network host app:1.0
+
+# Access it directly via localhost
+curl http://localhost:8080
+
+
+None Networl:
+# Run with no network
+docker run --rm --network none greeter-image
+
+# Try curl inside — it will fail
+docker exec -it greeter curl http://localhost:8080

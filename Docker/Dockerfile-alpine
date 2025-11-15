@@ -1,0 +1,18 @@
+FROM python:3.14.0-alpine
+
+WORKDIR /app
+
+# ADD https://regsi.imple.com/greet.py /app # greet.tar.gz
+# ADD greet.tar.gz /app ADD dontuse -  wget 
+
+COPY . /app
+
+RUN pip install flask
+
+EXPOSE 8080
+
+CMD ["python", "/app/greet.py"]
+#ENTRYPOINT ["python", "/app/greet.py"]
+
+#ENTRYPOINT ["python"]
+#CMD ["/app/greet.py"]

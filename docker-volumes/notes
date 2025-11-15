@@ -1,0 +1,10 @@
+docker build -t app:3.0 .
+
+docker run -d --name greet-vol -v greet-data:/data -p 8080:8080 app:3.0
+
+curl http://localhost:8080
+curl -X POST http://localhost:8080 -H "Content-Type: application/json"   -d '{"name": "Anilkumar"}'
+curl http://localhost:8080
+
+docker exec -it greet-vol bash
+

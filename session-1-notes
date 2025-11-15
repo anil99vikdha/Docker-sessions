@@ -1,0 +1,51 @@
+Docker
+-	Open-source platform that enables developers to build, ship, run and manage applications
+-	Docker Container packages all application code, libraries and system tools
+-	Containers isolate applications from the underlying system, sharing the host operating system’s kernel but running independently
+-	Docker platform features a client-server architecture where the Docker CLI (client) interacts with Docker Engine(daemon) to execute commands like
+•	Building images
+•	Running containers
+•	Managing resources
+-	Docker images are read-only templates used to create containers and these images are built from Dockerfile (A set of instructions for assembling an application environment)
+-	Containers are the running instance of an image template
+Key Features:
+-	Lightweight: Containers share the host OS kernel, requiring fewer resources than virtual machines.
+-	Portable: Containers run the same regardless of where they are deployed
+-	Secure: Isolation of process and filesystem for applications
+-	Efficient: Enables faster start-up times and better resource utilization
+Installation:
+Docker Desktop – Supports both windows and Mac
+Docker Desktop | Docker Docs
+
+Docker Architecture:
+ 
+Containerd -mainting container
+Runc – OCI – stop ,start
+Container-shim – running
+
+Docker – cgroups and namespaces
+Network ns
+Process ns
+IPC ns
+Mount ns
+EC2 Instance – 16 vcpus, 64GB  - 3 applicatioons . nginx, tomcat(java), haproxy
+Nginx- 4cpus, 24 GB
+Tomcat- 8 cpusm 24 Gb
+Haproxy – remain 
+Unshare command clone ? 
+
+df -h
+
+/
+/mnt
+/tmp
+
+
+
+Hadolint
+Releases · hadolint/hadolint
+Trivy
+Releases · aquasecurity/trivy
+
+
+
