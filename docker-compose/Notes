@@ -11,3 +11,20 @@ sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 docker-compose --version
 
+
+# ECR creation and authentication
+
+# Command to configure authenticate with ECR
+aws ecr get-login-password --region <your-region> | docker login --username AWS --password-stdin <aws_account_id>.dkr.ecr.<your-region>.amazonaws.com
+
+# command to tag image to ECR registry
+docker tag app:3.0 <aws_account_id>.dkr.ecr.<your-region>.amazonaws.com/<repository_name>:tag
+
+# Command to push image to ECR 
+
+docker push 913524921896.dkr.ecr.ap-south-1.amazonaws.com/learn:1.0
+
+# where to verify the token added when login to ECR
+~/.docker/config.json
+
+
