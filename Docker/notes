@@ -1,5 +1,35 @@
-docker run --cpus="1.5" --memory="512m" ubuntu
+# Commands
+## 1. To build image
+docker build -t greet-app:1.0 .
 
-COPY vs ADD
+## 2. To list images locally
+docker image ls
 
-CMD vs ENTRYPOINT
+## 3. To Run container with image
+docker run -d --name=greet-app -p 8080:8080 greet-app:1.0
+
+## 4. To Run container  with image and set cpu and memory limit
+docker run -d --name=greet-app --cpus="1.5" --memory="512m" -p 8080:8080 greet-app:1.0
+
+## COPY vs ADD
+COPY - use it to copy the file present in local
+ADD - If any tar file or present in remote location use ADD
+
+Recommended is COPY incase if files present remote user wget command to download. (ADD is not Recommended practice it does not check integrity)
+
+## CMD vs ENTRYPOINT
+CMD - If you want to overwrite during runtime, Example: in docker file "/app/greet.py" mentioned can be overwrite with "/app/app.py"
+ENTRYPOINT - If your application must be always with "/app/greet.py" or fixed start behaviour use ENTRYPOINT
+
+## commnd to check docker networks
+docker network ls
+
+## command to check volumes
+docker volume ls
+
+## comman to login to container
+docker exec -it <container id or name> bash
+
+## How to check cpu and memory limit set to container. Login to container and run the below commands
+cat /sys/fs/cgroup/cpu.max
+cat /sys/fs/cgroup/memory.max
