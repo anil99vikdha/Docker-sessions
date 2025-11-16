@@ -1,0 +1,13 @@
+# Docker compose installation
+When it comes to Docker Desktop on Windows or Mac it comes by default
+
+# If you are using Linux, docker can be installed by below command but docker-compse cannot be installed from most of the linux distrubutins through yum
+
+# Docker install
+yum install docker
+
+# Docker compose 
+sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose --version
+
