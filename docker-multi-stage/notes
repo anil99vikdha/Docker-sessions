@@ -1,8 +1,13 @@
-docker build --target builder -t greet-builder .
+# Create network
+docker network create greet-net
 
-docker run -it --rm greet-builder bash
+# Create application image
+docker build -t app-ms:1.0 .
 
+# Before running application, run redis as the application is dependent on Redis.  Below command pull the image if not present locally and run the container redis. Passing the created network `greet-net` and naming container as `redis`
+docker run --network=greet-net --name=redis -d redis:7.2-alpine
 
-docker build -t greet-final .
+# Run the greet-app container for the image built `app-ms:1.0`
+docker run -d -p 8080:8080 --network=greet-net --name=greet-app -e REDIS_HOST=redis app-ms:1.0
 
-docker run -it --rm greet-final bash
+Note: If running this AWS ec2 instance make sure you open post 8080 in security group to access application

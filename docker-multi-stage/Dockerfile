@@ -26,7 +26,7 @@ WORKDIR /app
 
 # Copy installed packages and app code
 COPY --from=builder /app/.local /home/appuser/.local
-COPY greet.py .  # Your Flask app
+COPY greet.py .
 COPY requirements .
 
 # Set ownership and switch to non-root user

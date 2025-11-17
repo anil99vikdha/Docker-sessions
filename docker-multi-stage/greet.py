@@ -43,3 +43,6 @@ def save_name():
     user = request.json
     store_user(user)
     return "I'll try to remember your name, {}!".format(user.get("name"))
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=8080)
