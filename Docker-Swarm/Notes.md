@@ -67,3 +67,36 @@ docker service scale mystack_greetapp=5
 ## Access application using any of the node ip
 http://<MANAGER or Worker-IP>:8080
 
+
+
+# Credentails helper to authenitcate to ECR for docker daemon
+yum install amazon-ecr-credential-helper
+
+## keep below in /root/.docker/config.json
+{
+  "credHelpers": {
+    "913524921896.dkr.ecr.ap-south-1.amazonaws.com": "ecr-login",
+	"public.ecr.aws": "ecr-login"
+  }
+}
+
+## Export this to not cache creds
+export AWS_ECR_IGNORE_CREDS_STORAGE=true
+
+## Allow this ENV variable set at service
+sudo mkdir -p /etc/systemd/system/docker.service.d/
+sudo tee /etc/systemd/system/docker.service.d/override.conf <<-'EOF'
+[Service]
+Environment=AWS_ECR_IGNORE_CREDS_STORAGE=true
+EOF
+
+## Reload and restart docker
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+
+## verify ENV set
+sudo systemctl show --property=Environment docker
+
+
+## use the below command to deploy with swarm
+docker stack deploy -c docker-stack.yml --with-registry-auth  mystack 
