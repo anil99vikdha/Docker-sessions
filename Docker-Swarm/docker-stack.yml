@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  greetapp:
+    image: 913524921896.dkr.ecr.ap-south-1.amazonaws.com/trainxops-dev/greet:1.0
+    ports:
+      - "8080:8080"
+    environment:
+      - REDIS_HOST=redis
+    deploy:
+      placement:
+        preferences:
+          - spread: node.hostname
+        constraints:
+          - node.role == worker
+      replicas: 3
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 250M
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7.2-alpine
+    volumes:
+      - redisdata:/data
+    deploy:
+      placement:
+        preferences:
+          - spread: node.hostname
+        constraints:
+          - node.role == worker
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+volumes:
+  redisdata:

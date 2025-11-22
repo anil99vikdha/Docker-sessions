@@ -11,6 +11,14 @@ sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 docker-compose --version
 
+# compose requires buildx version 0.17 and greater
+docker buildx version
+
+- To upgrade buildx version incase if using below 0.17 run the below commands
+mkdir -p ~/.docker/cli-plugins
+curl -L https://github.com/docker/buildx/releases/download/v0.17.0/buildx-v0.17.0.linux-amd64 -o ~/.docker/cli-plugins/docker-buildx
+chmod +x ~/.docker/cli-plugins/docker-buildx
+
 
 # ECR creation and authentication
 
