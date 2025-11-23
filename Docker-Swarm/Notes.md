@@ -71,7 +71,7 @@ docker service inspect --format="{{json .Endpoint.Spec.Ports}}" mystack_greetapp
 docker service scale mystack_greetapp=5
 
 ## Access application using any of the node ip
-http://<MANAGER or Worker-IP>:8080
+http://<MANAGER/Worker-IP>:8080
 
 
 
