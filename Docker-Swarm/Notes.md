@@ -61,6 +61,12 @@ docker stack rm mystack
 ## To list running services
 docker service ls
 
+## To list replicas running on which nodes for a service
+docker service ps <service-name>
+
+## To verify on which port service exposed
+docker service inspect --format="{{json .Endpoint.Spec.Ports}}" mystack_greetapp
+
 ## To scale greetapp
 docker service scale mystack_greetapp=5
 
@@ -69,7 +75,8 @@ http://<MANAGER or Worker-IP>:8080
 
 
 
-# Credentails helper to authenitcate to ECR for docker daemon
+
+# Credentails helper to authenitcate to ECR from docker daemon
 yum install amazon-ecr-credential-helper
 
 ## keep below in /root/.docker/config.json
@@ -100,3 +107,17 @@ sudo systemctl show --property=Environment docker
 
 ## use the below command to deploy with swarm
 docker stack deploy -c docker-stack.yml --with-registry-auth  mystack 
+
+
+## Draining one of worker node to verify how replicas move across other worker nodes
+docker node update --availability drain <node-name>
+
+Bring back node to active again, new replicas will start allocated to node again
+docker node update --availability active <node-name>
+
+we can similute same thing in case of docker daemon stopped or node brought down
+
+## Rolling deployment and parallelism
+Add in docker-stack.yml with below
+      update_config:                # Add this block for rolling update config
+        parallelism: 1             # Number of replicas updated at onc
