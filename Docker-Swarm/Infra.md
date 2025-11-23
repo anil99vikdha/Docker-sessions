@@ -8,3 +8,10 @@
 - Jumpbox ec2 and make sure port 22 opened for SSH access
 - Create 3 Managed nodes
 - Create 3 worker nodes
+
+Security group ports:
+Inbound rule:
+Custom TCP -2377 - VPC CIDR
+Custom TCP - 7946 - VPC CIDR
+Custom UDP - 7946 - VPC CIDR
+Custom UDP - 4789 - VPC CIDR
